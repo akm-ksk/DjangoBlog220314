@@ -5,6 +5,14 @@
     {% if not post.publish %}非公開:{% endif %}
     {{post.title}}
   </h2>
+  <ul>
+    {% for key in post.tag.all %}
+    <li>{{key}}</li>
+    {% endfor %}
+  </ul>
+  {% if post.category %}
+  <a href="">{{post.category}}</a>
+  {% endif %}
   <p>公開日:{{post.create_day}}</p>
   <p>更新日:{{post.update_day}}</p>
   <img src="{{post.pic.url}}" alt="{{post.title}}">

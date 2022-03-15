@@ -14,10 +14,23 @@
     <img src="{{post.pic.url}}" alt="{{post.title}}">
     <p>{{post.text}}</p>
     <a href="{% url 'Detail' post.pk %}">この日記を見る</a>
+    <ul>
+      {% for key in post.tag.all %}
+      <li>
+        <a href="{% url 'Tag' key.slug %}">
+          {{key}}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% if post.category %}
+    <a href="{% url 'Category' post.category.slug %}">{{post.category}}</a>
+    {% endif %}
   </li>
   {% endif %}
   {% endfor %}
 </ul>
 
+{% include 'blog/components/paginatetion.html' %}
 
 {% endblock contet %}
