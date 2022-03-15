@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% block contet %}
+<ul>
+  {% for post in posts %}
+  {% if post.publish or user.is_authenticated %}
+  <li>
+    <h2>
+      {% if not post.publish %}非公開:{% endif %}
+      {{post.title}}
+    </h2>
+    <p>公開日:{{post.create_day}}</p>
+    <p>更新日:{{post.update_day}}</p>
+    <img src="{{post.pic.url}}" alt="{{post.title}}">
+    <p>{{post.text}}</p>
+    <a href="{% url 'Detail' post.pk %}">この日記を見る</a>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+
+{% endblock contet %}
