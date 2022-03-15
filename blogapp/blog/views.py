@@ -10,7 +10,7 @@ class BlogTop(ListView):
   model = Post
   context_object_name = "posts"
   template_name = 'blog/top.html'
-  paginate_by = 1
+  paginate_by = 9
 
 
 
@@ -18,7 +18,7 @@ class BlogCategory(ListView):
   model = Post
   context_object_name = "posts"
   template_name = 'blog/top.html'
-  paginate_by = 1
+  paginate_by = 9
 
   def get_queryset(self):
     slug = self.kwargs['slug']
@@ -31,7 +31,7 @@ class BlogTag(ListView):
   model = Post
   context_object_name = "posts"
   template_name = 'blog/top.html'
-  paginate_by = 1
+  paginate_by = 9
 
   def get_queryset(self):
     slug = self.kwargs['slug']

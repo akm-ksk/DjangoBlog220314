@@ -1,3 +1,6 @@
+{% load static %}
+{% load sass_tags %}
+
 <!DOCTYPE html>
 <html lang="jp">
 <head>
@@ -5,9 +8,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog App</title>
+  <link rel="stylesheet" href="{% static 'blog/css/reset.css' %}">
+  <link rel="stylesheet" href="{% sass_src 'blog/scss/style.scss' %}">
 </head>
 <body>
+  <header>
+    <a href="{% url 'Top' %}">django blog</a>
+  </header>
   {% block contet %}
   {% endblock contet %}
 </body>
+<script src="{% static 'blog/js/common.js' %}"></script>
 </html>
