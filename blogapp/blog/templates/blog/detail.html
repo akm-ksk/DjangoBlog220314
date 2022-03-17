@@ -1,20 +1,30 @@
 {% extends 'blog/base.html' %}
 
 {% block contet %}
-  <h2>
-    {% if not post.publish %}非公開:{% endif %}
-    {{post.title}}
-  </h2>
-  <ul>
-    {% for key in post.tag.all %}
-    <li>{{key}}</li>
-    {% endfor %}
-  </ul>
-  {% if post.category %}
-  <a href="">{{post.category}}</a>
-  {% endif %}
-  <p>公開日:{{post.create_day}}</p>
-  <p>更新日:{{post.update_day}}</p>
-  <img src="{{post.pic.url}}" alt="{{post.title}}">
-  <p>{{post.text}}</p>
+<main id="detail" class="cntIn">
+  <div class="titleArea">
+    <h1 class="title">
+      {% if not post.publish %}非公開:{% endif %}
+      {{post.title}}
+    </h1>
+    <ul class="dateData flexBox">
+      <li>投稿:{{post.create_day}}</li>
+      {% if not post.create_day|date:'ymd' == post.update_day|date:'ymd' %}
+      <li>更新:{{post.update_day}}</li>
+      {% endif %}
+    </ul>
+    <ul class="tags">
+      {% for key in post.tag.all %}
+      <li>
+        <a href="{% url 'Tag' key.slug %}">#{{key}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% if post.category %}
+    <a class="category" href="">{{post.category}}</a>
+    {% endif %}
+  </div>
+  <img class="" src="{{post.pic.url}}" alt="{{post.title}}">
+  <p class="text">{{post.text | linebreaksbr}}</p>
+</main>
 {% endblock contet %}

@@ -10,7 +10,11 @@ class BlogTop(ListView):
   model = Post
   context_object_name = "posts"
   template_name = 'blog/top.html'
-  paginate_by = 9
+  paginate_by = 3
+
+  def get_queryset(self):
+    posts = super().get_queryset()
+    return posts.order_by('-create_day')
 
 
 
@@ -18,12 +22,17 @@ class BlogCategory(ListView):
   model = Post
   context_object_name = "posts"
   template_name = 'blog/top.html'
-  paginate_by = 9
+  paginate_by = 3
 
   def get_queryset(self):
     slug = self.kwargs['slug']
     self.category = get_object_or_404(Category, slug=slug)
-    return super().get_queryset().filter(category=self.category)
+    return super().get_queryset().filter(category=self.category).order_by('-create_day')
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['category'] = self.category
+    return context
 
 
 
@@ -31,12 +40,17 @@ class BlogTag(ListView):
   model = Post
   context_object_name = "posts"
   template_name = 'blog/top.html'
-  paginate_by = 9
+  paginate_by = 3
 
   def get_queryset(self):
     slug = self.kwargs['slug']
     self.tag = get_object_or_404(Tag, slug=slug)
-    return super().get_queryset().filter(tag=self.tag)
+    return super().get_queryset().filter(tag=self.tag).order_by('-create_day')
+
+  def get_context_data(self, **kwargs) :
+    context = super().get_context_data(**kwargs)
+    context['tag'] = self.tag
+    return context
 
 
 
